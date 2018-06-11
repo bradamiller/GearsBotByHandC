@@ -1,31 +1,23 @@
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
 
-#include "Elevator.h"
-#include "SmartDashboard/SmartDashboard.h"
-#include "LiveWindow/LiveWindow.h"
-#include "AnalogPotentiometer.h"
-#include "PIDController.h"
-#include "Victor.h"
+#include "Subsystems/Elevator.h"
 
-Elevator::Elevator() : PIDSubsystem("Elevator", 1.0, 0.0, 0.0) {
-    frc::LiveWindow *lw = frc::LiveWindow::GetInstance();
-    motor = new frc::Victor(2);
-    lw->AddActuator("Elevator", "motor", std::static_pointer_cast<frc::Victor>(motor));
+Elevator::Elevator() : frc::PIDSubsystem("Elevator", 1.0, 0.0, 0.0) {
+  SetAbsoluteTolerance(0.2);
+  GetPIDController()->SetContinuous(false);
 
-    pot = new frc::AnalogPotentiometer(1, 1.0, 0.0);
-    lw->AddSensor("Elevator", "pot", pot);
-
-	SetAbsoluteTolerance(0.2);
-    GetPIDController()->SetContinuous(false);
-    lw->AddActuator("Elevator", "PIDSubsystem Controller", GetPIDController());
+  m_motor.SetName("Elevator", "motor");
+  m_pot.SetName("Elevator", "pot");
+  GetPIDController()->SetName("Elevator", "PIDSubsystem Controller");
 }
 
-double Elevator::ReturnPIDInput() {
-        return pot->Get();
-}
+double Elevator::ReturnPIDInput() { return m_pot.Get(); }
 
-void Elevator::UsePIDOutput(double output) {
-    motor->PIDWrite(output);
-}
+void Elevator::UsePIDOutput(double output) { m_motor.PIDWrite(output); }
 
-void Elevator::InitDefaultCommand() {
-}
+void Elevator::InitDefaultCommand() {}

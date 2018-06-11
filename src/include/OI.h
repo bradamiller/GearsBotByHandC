@@ -1,16 +1,24 @@
-#ifndef OI_H
-#define OI_H
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
 
-#include "WPILib.h"
+#pragma once
+
+#include <Buttons/JoystickButton.h>
+#include <Joystick.h>
 
 class OI {
-private:
-	std::shared_ptr<frc::Joystick> driverStick;
-	std::shared_ptr<frc::JoystickButton> button2;
-	std::shared_ptr<frc::JoystickButton> button1;
-public:
-	OI();
-	frc::Joystick * getStick();
-};
+ public:
+  OI();
 
-#endif
+  frc::Joystick& GetStick();
+
+ private:
+  frc::Joystick m_driverStick{0};
+  // FIXME: Add reference overloads of frc::JoystickButton constructor
+  frc::JoystickButton m_button1{&m_driverStick, 1};
+  frc::JoystickButton m_button2{&m_driverStick, 2};
+};

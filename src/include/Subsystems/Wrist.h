@@ -1,17 +1,25 @@
-#ifndef WRIST_H
-#define WRIST_H
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
 
-#include "Commands/PIDSubsystem.h"
-#include "WPILib.h"
+#pragma once
 
-class Wrist: public frc::PIDSubsystem {
+#include <AnalogPotentiometer.h>
+#include <Commands/PIDSubsystem.h>
+#include <Victor.h>
+
+class Wrist : public frc::PIDSubsystem {
  public:
-	std::shared_ptr<frc::AnalogPotentiometer> pot;
-	std::shared_ptr<frc::SpeedController> motor;
-	Wrist();
-	double ReturnPIDInput() override;
-	void UsePIDOutput(double output) override;
-	void InitDefaultCommand() override;
-};
+  Wrist();
 
-#endif
+  double ReturnPIDInput() override;
+  void UsePIDOutput(double output) override;
+  void InitDefaultCommand() override;
+
+ private:
+  frc::AnalogPotentiometer m_pot{0, 1.0, 0.0};
+  frc::Victor m_motor{1};
+};

@@ -1,47 +1,32 @@
-#include "ctre/Phoenix.h"
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
 
-#include "DriveBase.h"
+#include "Subsystems/DriveBase.h"
+
+#include <ctre/Phoenix.h>
+
 #include "Robot.h"
-#include "SpeedControllerGroup.h"
-#include "LiveWindow/LiveWindow.h"
-#include "Joystick.h"
-#include "Drive/DifferentialDrive.h"
 
 DriveBase::DriveBase() : frc::Subsystem("DriveBase") {
-    frc::LiveWindow *lw = frc::LiveWindow::GetInstance();
-
-    leftFront = new WPI_TalonSRX(0);
-    leftRear = new WPI_TalonSRX(1);
-    leftMotors = frc::SpeedControllerGroup(*leftFront, *leftRear  );
-    lw->AddActuator("DriveBase", "leftMotors", leftMotors);
-
-    rightFront = new WPI_TalonSRX(2);
-    rightRear = new WPI_TalonSRX(3);
-    rightMotors = new frc::SpeedControllerGroup(*rightFront, *rightRear  );
-
-    differentialDrive = new frc::DifferentialDrive(leftMotors, rightMotors);
-    lw->AddActuator("DriveBase", "rightMotors", rightMotors);
+  m_leftMotors.SetName("DriveBase", "leftMotors");
+  m_rightMotors.SetName("DriveBase", "rightMotors");
 }
 
-void DriveBase::InitDefaultCommand() {
+void DriveBase::InitDefaultCommand() {}
+
+void DriveBase::Periodic() {}
+
+void DriveBase::DriveWithJoystick() {
+  auto& stick = Robot::oi.GetStick();
+  m_differentialDrive.ArcadeDrive(-stick.GetY(), -stick.GetX());
 }
 
-void DriveBase::Periodic() {
-}
+void DriveBase::Forwards() { m_differentialDrive.ArcadeDrive(0.5, 0); }
 
-void DriveBase::driveWithJoystick() {
-	frc::Joystick *stick = Robot::oi->getStick();
-	differentialDrive->ArcadeDrive(-stick->GetY(), -stick->GetX());
-}
+void DriveBase::Backwards() { m_differentialDrive.ArcadeDrive(-0.5, 0); }
 
-void DriveBase::backwards() {
-	differentialDrive->ArcadeDrive(-0.5, 0);
-}
-
-void DriveBase::stop() {
-	differentialDrive->StopMotor();
-}
-
-void DriveBase::forwards() {
-	differentialDrive->ArcadeDrive(0.5, 0);
-}
+void DriveBase::Stop() { m_differentialDrive.StopMotor(); }

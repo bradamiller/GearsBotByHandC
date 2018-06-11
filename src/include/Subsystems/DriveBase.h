@@ -1,27 +1,37 @@
-#ifndef DRIVEBASE_H
-#define DRIVEBASE_H
-#include "Commands/Subsystem.h"
-#include "ctre/Phoenix.h"
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
 
-#include "WPILib.h"
+#pragma once
 
-class DriveBase: public frc::Subsystem {
-private:
-	WPI_TalonSRX *leftFront;
-	WPI_TalonSRX *leftRear;
-	frc::SpeedControllerGroup *leftMotors;
-	WPI_TalonSRX *rightFront;
-	WPI_TalonSRX *rightRear;
-	frc::SpeedControllerGroup *rightMotors;
-	frc::DifferentialDrive *differentialDrive;
-public:
-	DriveBase();
-	void InitDefaultCommand() override;
-	void Periodic() override;
-	void driveWithJoystick();
-	void backwards();
-	void forwards();
-	void stop();
+#include <Commands/Subsystem.h>
+#include <Drive/DifferentialDrive.h>
+#include <SpeedControllerGroup.h>
+#include <ctre/Phoenix.h>
+
+class DriveBase : public frc::Subsystem {
+ public:
+  DriveBase();
+
+  void InitDefaultCommand() override;
+  void Periodic() override;
+
+  void DriveWithJoystick();
+  void Forwards();
+  void Backwards();
+  void Stop();
+
+ private:
+  WPI_TalonSRX m_leftFront{0};
+  WPI_TalonSRX m_leftRear{1};
+  frc::SpeedControllerGroup m_leftMotors{m_leftFront, m_rightFront};
+
+  WPI_TalonSRX m_rightFront{2};
+  WPI_TalonSRX m_rightRear{3};
+  frc::SpeedControllerGroup m_rightMotors{m_rightFront, m_rightRear};
+
+  frc::DifferentialDrive m_differentialDrive{m_leftMotors, m_rightMotors};
 };
-
-#endif

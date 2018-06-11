@@ -1,16 +1,18 @@
-#ifndef DRIVEFORWARD_H
-#define DRIVEFORWARD_H
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
 
-#include "Commands/Subsystem.h"
-#include "../Robot.h"
+#pragma once
 
-class DriveForward: public frc::TimedCommand {
-public:
-	DriveForward();
-	void Initialize() override;
-	void End() override;
+#include <Commands/TimedCommand.h>
 
-private:
+class DriveForward : public frc::TimedCommand {
+ public:
+  DriveForward();
+
+  void Initialize() override;
+  void End() override;
 };
-
-#endif

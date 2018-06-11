@@ -1,27 +1,20 @@
-#include "Gripper.h"
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
 
-#include "LiveWindow/LiveWindow.h"
-#include "Victor.h"
-#include "SpeedController.h"
+#include "Subsystems/Gripper.h"
 
 Gripper::Gripper() : frc::Subsystem("Gripper") {
-    frc::LiveWindow *lw = frc::LiveWindow::GetInstance();
-    motor.reset(new frc::Victor(0));
-    lw->AddActuator("Gripper", "motor", std::static_pointer_cast<frc::Victor>(motor));
+  m_motor.SetName("Gripper", "motor");
 }
 
-void Gripper::InitDefaultCommand() {
-}
+void Gripper::InitDefaultCommand() {}
 
-void Gripper::close() {
-	motor->Set(-1.0);
-}
+void Gripper::Open() { m_motor.Set(1.0); }
 
-void Gripper::open() {
-	motor->Set(1.0);
-}
+void Gripper::Close() { m_motor.Set(-1.0); }
 
-void Gripper::stop() {
-	motor->StopMotor();
-}
-
+void Gripper::Stop() { m_motor.StopMotor(); }
