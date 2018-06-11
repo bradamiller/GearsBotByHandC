@@ -1,10 +1,5 @@
 #include "Robot.h"
 
-std::shared_ptr<DriveBase> Robot::driveBase;
-std::shared_ptr<Gripper> Robot::gripper;
-std::shared_ptr<Wrist> Robot::wrist;
-std::shared_ptr<Elevator> Robot::elevator;
-std::unique_ptr<OI> Robot::oi;
 
 void Robot::RobotInit() {
 	lw = frc::LiveWindow::GetInstance();
