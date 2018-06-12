@@ -5,7 +5,10 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Subsystems/Elevator.h"
+#include "../../include/Subsystems/Elevator.h"
+
+#include <PIDController.h>
+#include <SmartDashboard/Sendable.h>
 
 Elevator::Elevator() : frc::PIDSubsystem("Elevator", 1.0, 0.0, 0.0) {
   SetAbsoluteTolerance(0.2);

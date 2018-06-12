@@ -5,7 +5,12 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Subsystems/Wrist.h"
+#include "../../include/Subsystems/Wrist.h"
+
+#include <PIDController.h>
+#include <SmartDashboard/Sendable.h>
+#include <Commands/PIDSubsystem.h>
+#include <Victor.h>
 
 Wrist::Wrist() : PIDSubsystem("Wrist", 1.0, 0.0, 0.0) {
   SetAbsoluteTolerance(0.2);
