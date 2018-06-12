@@ -10,10 +10,9 @@
 #include "Robot.h"
 
 DriveForward::DriveForward() : frc::TimedCommand(1) {
-  // FIXME: Add reference overload of Requires()
-  Requires(&Robot::driveBase);
+  Requires(Robot::driveBase);
 }
 
-void DriveForward::Initialize() { Robot::driveBase.Forwards(); }
+void DriveForward::Initialize() { Robot::driveBase->Forwards(); }
 
-void DriveForward::End() { Robot::driveBase.Stop(); }
+void DriveForward::End() { Robot::driveBase->Stop(); }

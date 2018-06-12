@@ -6,14 +6,12 @@
 /*----------------------------------------------------------------------------*/
 
 #include "Commands/CloseGripper.h"
-
 #include "Robot.h"
 
 CloseGripper::CloseGripper() : frc::TimedCommand(1) {
-  // FIXME: Add reference overload of Requires()
-  Requires(&Robot::gripper);
+  Requires(Robot::gripper);
 }
 
-void CloseGripper::Initialize() { Robot::gripper.Close(); }
+void CloseGripper::Initialize() { Robot::gripper->Close(); }
 
-void CloseGripper::End() { Robot::gripper.Stop(); }
+void CloseGripper::End() { Robot::gripper->Stop(); }

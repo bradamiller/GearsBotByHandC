@@ -20,11 +20,11 @@
 
 class Robot : public frc::TimedRobot {
  public:
-  static OI oi;
-  static DriveBase driveBase;
-  static Gripper gripper;
-  static Wrist wrist;
-  static Elevator elevator;
+  static OI * oi;
+  static DriveBase * driveBase;
+  static Gripper * gripper;
+  static Wrist * wrist;
+  static Elevator * elevator;
 
   void RobotInit() override;
   void DisabledInit() override;

@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "Subsystems/DriveBase.h"
-
 #include <ctre/Phoenix.h>
 
 #include "Robot.h"
@@ -21,7 +20,7 @@ void DriveBase::InitDefaultCommand() {}
 void DriveBase::Periodic() {}
 
 void DriveBase::DriveWithJoystick() {
-  auto& stick = Robot::oi.GetStick();
+  auto& stick = Robot::oi->GetStick();
   m_differentialDrive.ArcadeDrive(-stick.GetY(), -stick.GetX());
 }
 

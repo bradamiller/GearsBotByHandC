@@ -10,13 +10,13 @@
 #include <Commands/Scheduler.h>
 #include <SmartDashboard/SmartDashboard.h>
 
-OI Robot::oi;
-DriveBase Robot::driveBase;
-Gripper Robot::gripper;
-Wrist Robot::wrist;
-Elevator Robot::elevator;
-
 void Robot::RobotInit() {
+	Robot::oi = new OI();
+	Robot::driveBase = new DriveBase();
+	Robot::gripper = new Gripper();
+	Robot::wrist = new Wrist();
+	Robot::elevator = new Elevator();
+
   // FIXME: Add reference overload of frc::SendableChooser::AddDefault()
   m_chooser.AddDefault("Everything", &m_autonomousCommand);
   // FIXME: Add reference overload of frc::SmartDashboard::PutData()
