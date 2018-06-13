@@ -10,6 +10,12 @@
 #include <Commands/Scheduler.h>
 #include <SmartDashboard/SmartDashboard.h>
 
+OI * Robot::oi = NULL;
+Gripper * Robot::gripper = NULL;
+DriveBase * Robot::driveBase = NULL;
+Elevator * Robot::elevator = NULL;
+Wrist * Robot::wrist = NULL;
+
 void Robot::RobotInit() {
 	Robot::oi = new OI();
 	Robot::driveBase = new DriveBase();
