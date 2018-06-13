@@ -20,11 +20,11 @@
 
 class Robot : public frc::TimedRobot {
  public:
-  static OI oi;
-  static DriveBase driveBase;
-  static Gripper gripper;
-  static Wrist wrist;
-  static Elevator elevator;
+  static std::unique_ptr<OI> oi;
+  static std::unique_ptr<DriveBase> driveBase;
+  static std::unique_ptr<Gripper> gripper;
+  static std::unique_ptr<Wrist> wrist;
+  static std::unique_ptr<Elevator> elevator;
 
   void RobotInit() override;
   void DisabledInit() override;

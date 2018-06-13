@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "Subsystems/Gripper.h"
+
 #include <Victor.h>
 
 Gripper::Gripper() : frc::Subsystem("Gripper") {

@@ -6,14 +6,12 @@
 /*----------------------------------------------------------------------------*/
 
 #include "Commands/DriveAway.h"
-
 #include "Robot.h"
 
 DriveAway::DriveAway() : frc::TimedCommand(1) {
-  // FIXME: Add reference overload of Requires()
-  Requires(&Robot::driveBase);
+  Requires(Robot::driveBase.get());
 }
 
-void DriveAway::Initialize() { Robot::driveBase.Backwards(); }
+void DriveAway::Initialize() { Robot::driveBase->Backwards(); }
 
-void DriveAway::End() { Robot::driveBase.Stop(); }
+void DriveAway::End() { Robot::driveBase->Stop(); }

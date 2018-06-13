@@ -10,9 +10,8 @@
 #include "Robot.h"
 
 OpenGripper::OpenGripper() : frc::TimedCommand(1) {
-  // FIXME: Add reference overload of Requires()
-  Requires(&Robot::gripper);
+  Requires(Robot::gripper.get());
 }
 
-void OpenGripper::Initialize() { Robot::gripper.Open(); }
-void OpenGripper::End() { Robot::gripper.Close(); }
+void OpenGripper::Initialize() { Robot::gripper->Open(); }
+void OpenGripper::End() { Robot::gripper->Close(); }

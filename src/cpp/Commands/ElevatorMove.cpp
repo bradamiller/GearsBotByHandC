@@ -6,18 +6,16 @@
 /*----------------------------------------------------------------------------*/
 
 #include "Commands/ElevatorMove.h"
-
 #include "Robot.h"
 
 ElevatorMove::ElevatorMove(double setpoint) {
   m_setpoint = setpoint;
-  // FIXME: Add reference overload of Requires()
-  Requires(&Robot::elevator);
+  Requires(Robot::elevator.get());
 }
 
 void ElevatorMove::Initialize() {
-  Robot::elevator.Enable();
-  Robot::elevator.SetSetpoint(m_setpoint);
+  Robot::elevator->Enable();
+  Robot::elevator->SetSetpoint(m_setpoint);
 }
 
-bool ElevatorMove::IsFinished() { return Robot::elevator.OnTarget(); }
+bool ElevatorMove::IsFinished() { return Robot::elevator->OnTarget(); }

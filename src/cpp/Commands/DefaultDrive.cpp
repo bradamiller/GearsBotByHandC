@@ -10,10 +10,9 @@
 #include "Robot.h"
 
 DefaultDrive::DefaultDrive() {
-  // FIXME: Add reference overload of Requires()
-  Requires(&Robot::driveBase);
+  Requires(Robot::driveBase.get());
 }
 
-void DefaultDrive::Execute() { Robot::driveBase.DriveWithJoystick(); }
+void DefaultDrive::Execute() { Robot::driveBase->DriveWithJoystick(); }
 
 bool DefaultDrive::IsFinished() { return false; }

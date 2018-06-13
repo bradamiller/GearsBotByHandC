@@ -6,18 +6,16 @@
 /*----------------------------------------------------------------------------*/
 
 #include "Commands/WristMove.h"
-
 #include "Robot.h"
 
 WristMove::WristMove(double setpoint) {
   m_setpoint = setpoint;
-  // FIXME: Add reference overload of Requires()
-  Requires(&Robot::wrist);
+  Requires(Robot::wrist.get());
 }
 
 void WristMove::Initialize() {
-  Robot::wrist.Enable();
-  Robot::wrist.SetSetpoint(m_setpoint);
+  Robot::wrist->Enable();
+  Robot::wrist->SetSetpoint(m_setpoint);
 }
 
-bool WristMove::IsFinished() { return Robot::wrist.OnTarget(); }
+bool WristMove::IsFinished() { return Robot::wrist->OnTarget(); }
