@@ -10,7 +10,7 @@
 
 ElevatorMove::ElevatorMove(double setpoint) {
   m_setpoint = setpoint;
-  Requires(Robot::elevator);
+  Requires(Robot::elevator.get());
 }
 
 void ElevatorMove::Initialize() {

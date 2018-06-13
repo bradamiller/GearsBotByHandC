@@ -10,7 +10,7 @@
 
 WristMove::WristMove(double setpoint) {
   m_setpoint = setpoint;
-  Requires(Robot::wrist);
+  Requires(Robot::wrist.get());
 }
 
 void WristMove::Initialize() {

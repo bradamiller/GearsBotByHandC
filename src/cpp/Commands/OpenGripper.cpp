@@ -10,7 +10,7 @@
 #include "Robot.h"
 
 OpenGripper::OpenGripper() : frc::TimedCommand(1) {
-  Requires(Robot::gripper);
+  Requires(Robot::gripper.get());
 }
 
 void OpenGripper::Initialize() { Robot::gripper->Open(); }

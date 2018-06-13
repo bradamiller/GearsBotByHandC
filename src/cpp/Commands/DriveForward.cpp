@@ -10,7 +10,7 @@
 #include "Robot.h"
 
 DriveForward::DriveForward() : frc::TimedCommand(1) {
-  Requires(Robot::driveBase);
+  Requires(Robot::driveBase.get());
 }
 
 void DriveForward::Initialize() { Robot::driveBase->Forwards(); }

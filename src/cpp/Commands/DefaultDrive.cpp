@@ -10,7 +10,7 @@
 #include "Robot.h"
 
 DefaultDrive::DefaultDrive() {
-  Requires(Robot::driveBase);
+  Requires(Robot::driveBase.get());
 }
 
 void DefaultDrive::Execute() { Robot::driveBase->DriveWithJoystick(); }

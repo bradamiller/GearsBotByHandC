@@ -10,18 +10,18 @@
 #include <Commands/Scheduler.h>
 #include <SmartDashboard/SmartDashboard.h>
 
-OI * Robot::oi = NULL;
-Gripper * Robot::gripper = NULL;
-DriveBase * Robot::driveBase = NULL;
-Elevator * Robot::elevator = NULL;
-Wrist * Robot::wrist = NULL;
+std::unique_ptr<OI> Robot::oi;
+std::unique_ptr<Gripper> Robot::gripper;
+std::unique_ptr<DriveBase> Robot::driveBase;
+std::unique_ptr<Elevator> Robot::elevator;
+std::unique_ptr<Wrist> Robot::wrist;
 
 void Robot::RobotInit() {
-	Robot::oi = new OI();
-	Robot::driveBase = new DriveBase();
-	Robot::gripper = new Gripper();
-	Robot::wrist = new Wrist();
-	Robot::elevator = new Elevator();
+	Robot::oi = std::make_unique<OI>();
+	Robot::driveBase = std::make_unique<DriveBase>();
+	Robot::gripper = std::make_unique<Gripper>();
+	Robot::wrist = std::make_unique<Wrist>();
+	Robot::elevator = std::make_unique<Elevator>();
 
   // FIXME: Add reference overload of frc::SendableChooser::AddDefault()
   m_chooser.AddDefault("Everything", &m_autonomousCommand);

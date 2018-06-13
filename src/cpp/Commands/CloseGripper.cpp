@@ -9,7 +9,7 @@
 #include "Robot.h"
 
 CloseGripper::CloseGripper() : frc::TimedCommand(1) {
-  Requires(Robot::gripper);
+  Requires(Robot::gripper.get());
 }
 
 void CloseGripper::Initialize() { Robot::gripper->Close(); }

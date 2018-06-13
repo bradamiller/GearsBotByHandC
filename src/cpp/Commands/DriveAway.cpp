@@ -9,7 +9,7 @@
 #include "Robot.h"
 
 DriveAway::DriveAway() : frc::TimedCommand(1) {
-  Requires(Robot::driveBase);
+  Requires(Robot::driveBase.get());
 }
 
 void DriveAway::Initialize() { Robot::driveBase->Backwards(); }
